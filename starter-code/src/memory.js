@@ -1,4 +1,5 @@
 var MemoryGame = function (cards) {
+  this.cards = this.shuffleCard(cards);
   this.cards = cards;
   this.pickedCards = [];
   this.pairsClicked = 0;
@@ -16,21 +17,14 @@ MemoryGame.prototype.shuffleCard = function (cardsArr) {
 };
 
 MemoryGame.prototype.checkIfPair = function (firstCard, secondCard) {
-  var that = this;
   this.pairsClicked++;
   if (firstCard === secondCard) {
-    that.pairsGuessed++;
+    this.pairsGuessed++;
     return true;
   }
-  else {
-    return false;
-  }
+  else return false;
 }
 
 MemoryGame.prototype.finished = function () {
-  if(this.pairsGuessed === cards.length / 2) {
-    return true;
-  } else {
-    return false;
-  }
+  return this.pairsGuessed > 0 && this.pairsGuessed === this.cards.length / 2;
 };
